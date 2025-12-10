@@ -3,140 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Import American Cars | Vehículos USA en Stock</title>
+    <title>Import American Cars | Vehículos USA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Sistema de diseño minimalista tipo Apple */
         :root {
             --white: #ffffff;
-            --black: #1a1a1a;
-            --gray-50: #fafafa;
-            --gray-100: #f5f5f5;
-            --gray-800: #2c2c2c;
-            --blue: #0033a0;
-            --red: #d52b1e;
-            --green: #28a745;
-            --orange: #ff9800;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            --border: 1px solid #e8e8e8;
-            --radius: 3px;
+            --black: #000000;
+            --gray-50: #f5f5f7;
+            --gray-100: #e5e5e7;
+            --gray-200: #d2d2d7;
+            --gray-800: #1d1d1f;
+            --blue: #0066cc;
+            --green: #00a651;
+            --orange: #ff9500;
+            --border: 1px solid #d2d2d7;
+            --radius: 12px;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
         }
         
+        /* Reset y tipografía */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            line-height: 1.47059;
             color: var(--black);
             background: var(--white);
-            font-weight: 300;
-            letter-spacing: -0.01em;
+            font-weight: 400;
+            letter-spacing: -0.022em;
         }
         
-        /* Header */
+        /* Header minimalista */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--white);
-            border-bottom: var(--border);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
             z-index: 1000;
-            padding: 0.8rem 0;
-            backdrop-filter: blur(10px);
+            border-bottom: var(--border);
         }
         
         .header-container {
-            max-width: 1200px;
+            max-width: 980px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 22px;
+            height: 44px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
         
         .logo {
-            font-weight: 400;
-            font-size: 1.1rem;
+            font-size: 21px;
+            font-weight: 600;
             color: var(--black);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            letter-spacing: -0.5px;
         }
         
-        /* Hero con información clave */
+        /* Hero section */
         .hero {
-            margin-top: 80px;
-            padding: 4rem 2rem;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1621461133947-f63381c2f7f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
+            margin-top: 44px;
+            padding: 80px 22px;
             text-align: center;
+            background: var(--gray-50);
         }
         
         .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 350;
-            margin-bottom: 1rem;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.003em;
+            margin-bottom: 18px;
         }
         
-        .hero-stats {
+        .hero-subtitle {
+            font-size: 21px;
+            color: #86868b;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.381;
+        }
+        
+        /* Indicadores de stock clickeables */
+        .stock-indicators {
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
         }
         
-        .stat {
+        .indicator {
             text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: var(--green);
-        }
-        
-        /* Filtros de stock */
-        .stock-filters {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 0.6rem 1.2rem;
-            background: var(--white);
-            border: var(--border);
-            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: transform 0.3s;
+            padding: 16px;
+            border-radius: var(--radius);
         }
         
-        .filter-btn.active {
-            background: var(--black);
-            color: var(--white);
-            border-color: var(--black);
+        .indicator:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.02);
         }
+        
+        .indicator-number {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .indicator-label {
+            font-size: 12px;
+            color: #86868b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-stock { color: var(--green); }
+        .status-transit { color: var(--blue); }
+        .status-reserve { color: var(--orange); }
         
         /* Grid de vehículos */
-        .vehicles-grid {
-            max-width: 1200px;
+        .vehicles-section {
+            max-width: 980px;
             margin: 0 auto;
-            padding: 0 2rem 4rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            padding: 80px 22px;
         }
         
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -0.003em;
+        }
+        
+        .vehicles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        /* Tarjeta de vehículo */
         .vehicle-card {
             background: var(--white);
             border: var(--border);
@@ -150,126 +163,107 @@
             box-shadow: var(--shadow);
         }
         
-        .vehicle-status {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .status-stock {
-            background: var(--green);
-            color: var(--white);
-        }
-        
-        .status-reserve {
-            background: var(--orange);
-            color: var(--white);
-        }
-        
-        .status-transit {
-            background: var(--blue);
-            color: var(--white);
-        }
-        
         .vehicle-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            background: var(--gray-100);
         }
         
         .vehicle-info {
-            padding: 1.5rem;
+            padding: 24px;
         }
         
         .vehicle-title {
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
         
         .vehicle-price {
-            font-size: 1.3rem;
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        /* Badge de estado */
+        .vehicle-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 500;
-            margin-bottom: 1rem;
+            margin-bottom: 12px;
         }
         
-        .vehicle-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 1rem;
+        .status-badge-stock {
+            background: rgba(0, 166, 81, 0.1);
+            color: var(--green);
         }
         
-        /* Sistema de personalización */
-        .customization-section {
-            padding: 4rem 2rem;
-            background: var(--gray-50);
+        .status-badge-transit {
+            background: rgba(0, 102, 204, 0.1);
+            color: var(--blue);
         }
         
-        .customization-steps {
-            max-width: 800px;
-            margin: 2rem auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+        .status-badge-reserve {
+            background: rgba(255, 149, 0, 0.1);
+            color: var(--orange);
         }
         
-        .custom-step {
-            text-align: center;
-            padding: 1.5rem;
-        }
-        
-        .step-number {
-            width: 40px;
-            height: 40px;
+        /* Botones minimalistas */
+        .button {
+            display: inline-block;
+            padding: 12px 22px;
             background: var(--black);
             color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-weight: 400;
-        }
-        
-        /* Kits destacados */
-        .kits-showcase {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem 4rem;
-        }
-        
-        .kits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .kit-card {
-            background: var(--white);
-            border: var(--border);
+            text-decoration: none;
             border-radius: var(--radius);
-            padding: 1.5rem;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
             text-align: center;
         }
         
-        .kit-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            background: var(--blue);
-            color: var(--white);
-            border-radius: 3px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
+        .button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
         }
         
-        /* Modal */
+        .button-outline {
+            background: transparent;
+            color: var(--black);
+            border: var(--border);
+        }
+        
+        /* Filtros minimalistas */
+        .filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-button {
+            padding: 8px 16px;
+            background: transparent;
+            border: var(--border);
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-button.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+        
+        /* Modal de personalización responsive */
         .modal {
             display: none;
             position: fixed;
@@ -277,44 +271,144 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 2000;
-            padding: 2rem;
             overflow-y: auto;
         }
         
         .modal-content {
             background: var(--white);
-            max-width: 1000px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 80px auto;
             border-radius: var(--radius);
             position: relative;
+            animation: modalAppear 0.3s ease-out;
+        }
+        
+        @keyframes modalAppear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #86868b;
+            z-index: 10;
+        }
+        
+        /* Personalización responsive */
+        .customization-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .customization-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        .customization-options {
+            padding: 32px;
+        }
+        
+        .customization-summary {
+            padding: 32px;
+            background: var(--gray-50);
+            border-left: var(--border);
+        }
+        
+        /* Opciones de personalización */
+        .option-group {
+            margin-bottom: 32px;
+        }
+        
+        .option-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .option-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        
+        .option-item {
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option-item:hover {
+            border-color: var(--black);
+        }
+        
+        .option-item.selected {
+            border-color: var(--black);
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        .option-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: var(--gray-100);
         }
         
         /* Footer */
         .footer {
-            background: var(--gray-800);
-            color: var(--white);
-            padding: 4rem 2rem 2rem;
+            background: var(--gray-50);
+            padding: 60px 22px;
+            text-align: center;
+            border-top: var(--border);
         }
         
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
-                padding: 0 1rem;
-            }
-            
             .hero h1 {
-                font-size: 2rem;
+                font-size: 32px;
             }
             
-            .hero-stats {
+            .hero-subtitle {
+                font-size: 17px;
+            }
+            
+            .stock-indicators {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 20px;
             }
             
             .vehicles-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .customization-summary {
+                border-left: none;
+                border-top: var(--border);
+            }
+            
+            .modal-content {
+                margin: 20px;
+            }
+        }
+        
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -322,141 +416,135 @@
     <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-car"></i>
-                IMPORT AMERICAN CARS
+            <div class="logo">Import American Cars</div>
+            <div style="display: flex; gap: 32px;">
+                <a href="#vehicles" class="nav-link">Vehículos</a>
+                <a href="#customize" class="nav-link">Personalizar</a>
+                <a href="#contact" class="nav-link">Contacto</a>
             </div>
-            <nav>
-                <a href="#stock" style="color: var(--black); text-decoration: none; margin-left: 1.5rem;">Stock</a>
-                <a href="#personalizar" style="color: var(--black); text-decoration: none; margin-left: 1.5rem;">Personalizar</a>
-                <a href="#kits" style="color: var(--black); text-decoration: none; margin-left: 1.5rem;">Kits USA</a>
-                <a href="https://wa.me/56987654321" style="color: var(--black); text-decoration: none; margin-left: 1.5rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            </nav>
         </div>
     </header>
 
     <!-- Hero -->
-    <section class="hero">
-        <h1>Vehículos Americanos<br>Directo a Chile</h1>
-        <p style="max-width: 600px; margin: 0 auto; color: #ccc;">
-            Chevrolet Silverado • Toyota Tacoma • Ford Mustang • Jeep Wrangler
-            <br>Importamos desde USA, personalizamos y entregamos en Arica
-        </p>
+    <section class="hero" id="home">
+        <h1>Vehículos Americanos</h1>
+        <p class="hero-subtitle">Importación directa desde USA. Personalización con accesorios originales. Entrega en Arica.</p>
         
-        <div class="hero-stats">
-            <div class="stat">
-                <div class="stat-number">12</div>
-                <div>En Stock Arica</div>
+        <div class="stock-indicators">
+            <div class="indicator" onclick="filterVehicles('stock')">
+                <div class="indicator-number status-stock" id="stockCount">8</div>
+                <div class="indicator-label">En Stock Arica</div>
             </div>
-            <div class="stat">
-                <div class="stat-number">8</div>
-                <div>En Tránsito</div>
+            <div class="indicator" onclick="filterVehicles('transit')">
+                <div class="indicator-number status-transit" id="transitCount">6</div>
+                <div class="indicator-label">En Tránsito</div>
             </div>
-            <div class="stat">
-                <div class="stat-number">25+</div>
-                <div>Kits Disponibles</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">3-4</div>
-                <div>Meses Entrega</div>
+            <div class="indicator" onclick="filterVehicles('reserve')">
+                <div class="indicator-number status-reserve" id="reserveCount">4</div>
+                <div class="indicator-label">Para Reservar</div>
             </div>
         </div>
     </section>
 
-    <!-- Filtros de Stock -->
-    <section class="stock-filters" id="stock">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="stock">En Stock Arica</button>
-        <button class="filter-btn" data-filter="transit">En Tránsito</button>
-        <button class="filter-btn" data-filter="reserve">Para Reservar</button>
-        <button class="filter-btn" data-filter="silverado">Silverado</button>
-        <button class="filter-btn" data-filter="tacoma">Tacoma</button>
-        <button class="filter-btn" data-filter="mustang">Mustang</button>
-    </section>
-
-    <!-- Grid de Vehículos -->
-    <div class="vehicles-grid" id="vehiclesContainer">
-        <!-- Cargado dinámicamente -->
-    </div>
-
-    <!-- Sección de Personalización -->
-    <section class="customization-section" id="personalizar">
-        <h2 style="text-align: center; font-weight: 350; margin-bottom: 1rem;">Personaliza tu Vehículo</h2>
-        <p style="text-align: center; color: #666; max-width: 600px; margin: 0 auto 2rem;">
-            Agrega accesorios USA originales durante el proceso de importación
-        </p>
+    <!-- Vehículos -->
+    <section class="vehicles-section" id="vehicles">
+        <h2 class="section-title">Vehículos Disponibles</h2>
         
-        <div class="customization-steps">
-            <div class="custom-step">
-                <div class="step-number">1</div>
-                <h3 style="font-weight: 400; margin-bottom: 0.5rem;">Elige tu Base</h3>
-                <p style="color: #666; font-size: 0.9rem;">Selecciona Silverado, Tacoma o Mustang</p>
-            </div>
-            <div class="custom-step">
-                <div class="step-number">2</div>
-                <h3 style="font-weight: 400; margin-bottom: 0.5rem;">Personaliza</h3>
-                <p style="color: #666; font-size: 0.9rem;">Llantas, suspension, audio, kits LED</p>
-            </div>
-            <div class="custom-step">
-                <div class="step-number">3</div>
-                <h3 style="font-weight: 400; margin-bottom: 0.5rem;">Importamos</h3>
-                <p style="color: #666; font-size: 0.9rem;">Todo incluido, montado en Arica</p>
-            </div>
+        <div class="filters">
+            <button class="filter-button active" onclick="filterVehicles('all')">Todos</button>
+            <button class="filter-button" onclick="filterVehicles('stock')">En Stock</button>
+            <button class="filter-button" onclick="filterVehicles('transit')">En Tránsito</button>
+            <button class="filter-button" onclick="filterVehicles('reserve')">Para Reservar</button>
+            <button class="filter-button" onclick="filterVehicles('silverado')">Silverado</button>
+            <button class="filter-button" onclick="filterVehicles('tacoma')">Tacoma</button>
+            <button class="filter-button" onclick="filterVehicles('mustang')">Mustang</button>
         </div>
         
-        <div style="text-align: center; margin-top: 2rem;">
-            <button class="filter-btn" style="background: var(--black); color: var(--white);" onclick="startCustomization()">
-                <i class="fas fa-cog"></i> Simulador de Personalización
-            </button>
-        </div>
-    </section>
-
-    <!-- Kits Destacados -->
-    <section class="kits-showcase" id="kits">
-        <h2 style="text-align: center; font-weight: 350; margin-bottom: 1rem;">Kits USA Originales</h2>
-        <p style="text-align: center; color: #666; max-width: 600px; margin: 0 auto 2rem;">
-            Equipa tu vehículo con accesorios americanos de calidad
-        </p>
-        
-        <div class="kits-grid" id="kitsGrid">
+        <div class="vehicles-grid" id="vehiclesContainer">
             <!-- Cargado dinámicamente -->
         </div>
     </section>
 
+    <!-- Personalización -->
+    <section class="vehicles-section" id="customize" style="background: var(--gray-50);">
+        <h2 class="section-title">Personalización</h2>
+        <p style="color: #86868b; margin-bottom: 40px; max-width: 600px;">Agrega accesorios USA originales durante el proceso de importación.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+            <div style="text-align: center; padding: 32px; background: var(--white); border-radius: var(--radius); border: var(--border);">
+                <div style="width: 60px; height: 60px; background: var(--gray-100); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--black);">
+                    <i class="fas fa-cog" style="font-size: 24px;"></i>
+                </div>
+                <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 8px;">Llantas USA</h3>
+                <p style="color: #86868b; font-size: 14px;">Fuel, Method, BBS originales</p>
+            </div>
+            
+            <div style="text-align: center; padding: 32px; background: var(--white); border-radius: var(--radius); border: var(--border);">
+                <div style="width: 60px; height: 60px; background: var(--gray-100); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--black);">
+                    <i class="fas fa-volume-up" style="font-size: 24px;"></i>
+                </div>
+                <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 8px;">Audio Premium</h3>
+                <p style="color: #86868b; font-size: 14px;">Alpine, JBL, Pioneer USA</p>
+            </div>
+            
+            <div style="text-align: center; padding: 32px; background: var(--white); border-radius: var(--radius); border: var(--border);">
+                <div style="width: 60px; height: 60px; background: var(--gray-100); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--black);">
+                    <i class="fas fa-toolbox" style="font-size: 24px;"></i>
+                </div>
+                <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 8px;">Kits Off-Road</h3>
+                <p style="color: #86868b; font-size: 14px;">Suspensión, protectores, winch</p>
+            </div>
+            
+            <div style="text-align: center; padding: 32px; background: var(--white); border-radius: var(--radius); border: var(--border);">
+                <div style="width: 60px; height: 60px; background: var(--gray-100); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--black);">
+                    <i class="fas fa-lightbulb" style="font-size: 24px;"></i>
+                </div>
+                <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 8px;">Iluminación LED</h3>
+                <p style="color: #86868b; font-size: 14px;">Faros, niebla, interiores</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="button" onclick="showCustomizationModal()" style="width: auto; padding: 14px 32px;">
+                <i class="fas fa-cog"></i> Simular Personalización
+            </button>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="footer">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <h3 style="font-weight: 350; margin-bottom: 1rem;">Import American Cars</h3>
-            <p style="color: #999; margin-bottom: 2rem;">Taller en Arica, Chile • WhatsApp: +56 9 8765 4321</p>
-            <p style="color: #777; font-size: 0.9rem;">
-                Vehículos importados desde USA • Stock en Arica • Personalización con accesorios americanos
-            </p>
+    <footer class="footer" id="contact">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="logo" style="margin-bottom: 24px;">Import American Cars</div>
+            <p style="color: #86868b; margin-bottom: 32px;">Vehículos americanos importados desde USA. Personalización con accesorios originales. Taller en Arica.</p>
+            <a href="https://wa.me/56987654321" class="button" style="width: auto; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+            </a>
         </div>
     </footer>
 
     <!-- Modal de Personalización -->
     <div class="modal" id="customizationModal">
-        <button onclick="closeModal()" style="position: fixed; top: 2rem; right: 2rem; background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
-        <div class="modal-content" id="customizationContent">
-            <!-- Cargado dinámicamente -->
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div class="customization-container" id="customizationContent">
+                <!-- Cargado dinámicamente -->
+            </div>
         </div>
     </div>
 
     <script>
-        // Datos de vehículos con imágenes realistas
+        // Datos de vehículos con imágenes placeholder por tipo
         const vehicles = [
             {
                 id: 1,
-                name: "Chevrolet Silverado 1500 2021",
+                name: "Chevrolet Silverado 1500 LTZ 2021",
                 price: 32900000,
                 status: "stock",
                 location: "Arica",
-                image: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "5.3L V8 • 4x4 • Crew Cab • Color Gris",
-                specs: ["Motor 5.3L V8", "Tracción 4x4", "Caja automatizada", "Asientos de cuero"],
-                eta: "Disponible inmediato",
                 type: "silverado",
-                badge: "EN STOCK ARICA"
+                description: "5.3L V8 • 4x4 • Crew Cab • Cuero • Color Gris",
+                eta: "Disponible inmediato",
+                image: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
             },
             {
                 id: 2,
@@ -464,25 +552,21 @@
                 price: 28500000,
                 status: "transit",
                 location: "En tránsito",
-                image: "https://images.unsplash.com/photo-1621461133947-f63381c2f7f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "3.5L V6 • 4x4 • TRD Package • Color Blanco",
-                specs: ["Motor 3.5L V6", "Suspensión TRD", "Crawl Control", "Blind Spot Monitor"],
-                eta: "Llega en 15 días",
                 type: "tacoma",
-                badge: "EN TRÁNSITO"
+                description: "3.5L V6 • 4x4 • TRD Package • Color Blanco",
+                eta: "Llega en 15 días",
+                image: "https://images.unsplash.com/photo-1621461133947-f63381c2f7f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
             },
             {
                 id: 3,
-                name: "Ford Mustang GT 2020",
+                name: "Ford Mustang GT Premium 2020",
                 price: 26500000,
                 status: "stock",
                 location: "Arica",
-                image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "5.0L V8 • Convertible • 460 HP • Color Blanco",
-                specs: ["Motor 5.0L V8", "Convertible", "Sistema MagneRide", "Performance Pack"],
-                eta: "Disponible inmediato",
                 type: "mustang",
-                badge: "EN STOCK ARICA"
+                description: "5.0L V8 • Convertible • 460 HP • Color Blanco",
+                eta: "Disponible inmediato",
+                image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
             },
             {
                 id: 4,
@@ -490,12 +574,10 @@
                 price: 38900000,
                 status: "reserve",
                 location: "Subasta USA",
-                image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "6.6L Duramax • Diesel • 4x4 • Color Negro",
-                specs: ["Motor 6.6L Duramax", "Torque 910 lb-ft", "Towing Package", "Lujo máximo"],
-                eta: "3-4 meses",
                 type: "silverado",
-                badge: "RESERVA INMEDIATA"
+                description: "6.6L Duramax • Diesel • 4x4 • Color Negro",
+                eta: "3-4 meses",
+                image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
             },
             {
                 id: 5,
@@ -503,12 +585,10 @@
                 price: 27500000,
                 status: "transit",
                 location: "En barco",
-                image: "https://images.unsplash.com/photo-1576808591885-7045c9d4a5c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "3.5L V6 • 4x4 • Limited • Color Azul Nocturno",
-                specs: ["Motor 3.5L V6", "Asientos ventilados", "JBL Audio", "Techosolar"],
-                eta: "Llega en 30 días",
                 type: "tacoma",
-                badge: "EN TRÁNSITO"
+                description: "3.5L V6 • 4x4 • Limited • Color Azul",
+                eta: "Llega en 30 días",
+                image: "https://images.unsplash.com/photo-1576808591885-7045c9d4a5c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
             },
             {
                 id: 6,
@@ -516,61 +596,82 @@
                 price: 22500000,
                 status: "stock",
                 location: "Arica",
-                image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "2.3L EcoBoost • Premium • Color Rojo",
-                specs: ["Motor 2.3L EcoBoost", "Transmisión 10 velocidades", "Pantalla 8\"", "Climatizador"],
-                eta: "Disponible inmediato",
                 type: "mustang",
-                badge: "EN STOCK ARICA"
+                description: "2.3L EcoBoost • Premium • Color Rojo",
+                eta: "Disponible inmediato",
+                image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+            },
+            {
+                id: 7,
+                name: "Chevrolet Silverado RST 2022",
+                price: 34500000,
+                status: "transit",
+                location: "En tránsito",
+                type: "silverado",
+                description: "5.3L V8 • RST Package • Color Rojo",
+                eta: "Llega en 20 días",
+                image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+            },
+            {
+                id: 8,
+                name: "Toyota Tacoma SR5 2020",
+                price: 24500000,
+                status: "stock",
+                location: "Arica",
+                type: "tacoma",
+                description: "3.5L V6 • 4x4 • SR5 • Color Gris",
+                eta: "Disponible inmediato",
+                image: "https://images.unsplash.com/photo-1563720223485-8d6d5c5c8b9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
             }
         ];
 
-        // Kits de personalización
-        const kits = [
-            {
-                id: "k1",
-                name: "Kit Off-Road Pro",
-                price: 4200000,
-                image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                description: "Llantas 35\" + Suspensión lift + Winch + Barras",
-                compatible: ["Silverado", "Tacoma"]
-            },
-            {
-                id: "k2",
-                name: "Kit Deportivo Premium",
-                price: 3800000,
-                image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                description: "Llantas 20\" + Escape deportivo + Body Kit",
-                compatible: ["Mustang", "Silverado"]
-            },
-            {
-                id: "k3",
-                name: "Kit LED Complete",
-                price: 1850000,
-                image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                description: "Faros LED + Luces niebla + Interiores",
-                compatible: ["Silverado", "Tacoma", "Mustang"]
-            },
-            {
-                id: "k4",
-                name: "Kit Audio Competition",
-                price: 2750000,
-                image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-                description: "Sistema Alpine + Subwoofer + Amplificadores",
-                compatible: ["Silverado", "Tacoma", "Mustang"]
-            }
-        ];
+        // Opciones de personalización
+        const customizationOptions = {
+            wheels: [
+                { id: "w1", name: "Standard", price: 0, description: "Llantas de fábrica" },
+                { id: "w2", name: "Fuel Off-Road 20\"", price: 1200000, description: "Negras, diseño off-road" },
+                { id: "w3", name: "Method Race 17\"", price: 1800000, description: "Para off-road extremo" },
+                { id: "w4", name: "BBS Sport 19\"", price: 2500000, description: "Deportivas, ligero" }
+            ],
+            audio: [
+                { id: "a1", name: "Standard", price: 0, description: "Audio de fábrica" },
+                { id: "a2", name: "Pioneer Premium", price: 750000, description: "Con subwoofer" },
+                { id: "a3", name: "JBL Complete", price: 1200000, description: "Sistema 1200W" },
+                { id: "a4", name: "Alpine Competition", price: 2000000, description: "Sistema 2000W" }
+            ],
+            lighting: [
+                { id: "l1", name: "Standard", price: 0, description: "Iluminación standard" },
+                { id: "l2", name: "Kit LED Completo", price: 650000, description: "Faros, niebla, traseras" },
+                { id: "l3", name: "LED Premium", price: 950000, description: "LED adaptativo" }
+            ]
+        };
 
         // Estado
         let currentFilter = "all";
         let selectedVehicle = null;
+        let selectedOptions = {
+            wheels: customizationOptions.wheels[0],
+            audio: customizationOptions.audio[0],
+            lighting: customizationOptions.lighting[0]
+        };
 
         // Inicializar
         document.addEventListener('DOMContentLoaded', () => {
+            updateStockCounts();
             loadVehicles();
-            loadKits();
             setupFilters();
         });
+
+        // Actualizar contadores
+        function updateStockCounts() {
+            const stockCount = vehicles.filter(v => v.status === "stock").length;
+            const transitCount = vehicles.filter(v => v.status === "transit").length;
+            const reserveCount = vehicles.filter(v => v.status === "reserve").length;
+            
+            document.getElementById('stockCount').textContent = stockCount;
+            document.getElementById('transitCount').textContent = transitCount;
+            document.getElementById('reserveCount').textContent = reserveCount;
+        }
 
         // Formatear precio
         function formatPrice(price) {
@@ -590,67 +691,68 @@
                 }
             }
             
+            // Actualizar botones de filtro
+            document.querySelectorAll('.filter-button').forEach(btn => {
+                if (btn.textContent.toLowerCase() === filter || 
+                    (filter === "all" && btn.textContent === "Todos")) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
             container.innerHTML = filteredVehicles.map(vehicle => `
                 <div class="vehicle-card" onclick="showVehicleDetails(${vehicle.id})">
-                    <div style="position: relative;">
-                        <div class="vehicle-status ${vehicle.status === 'stock' ? 'status-stock' : vehicle.status === 'transit' ? 'status-transit' : 'status-reserve'}">
-                            ${vehicle.badge}
-                        </div>
-                        <img src="${vehicle.image}" alt="${vehicle.name}" class="vehicle-image">
-                    </div>
+                    <img src="${vehicle.image}" alt="${vehicle.name}" class="vehicle-image">
                     <div class="vehicle-info">
+                        <div class="vehicle-status ${vehicle.status === 'stock' ? 'status-badge-stock' : vehicle.status === 'transit' ? 'status-badge-transit' : 'status-badge-reserve'}">
+                            ${vehicle.status === 'stock' ? 'En Stock Arica' : vehicle.status === 'transit' ? 'En Tránsito' : 'Para Reservar'}
+                        </div>
                         <h3 class="vehicle-title">${vehicle.name}</h3>
                         <div class="vehicle-price">$${formatPrice(vehicle.price)} CLP</div>
-                        <p style="color: #666; margin-bottom: 1rem;">${vehicle.description}</p>
-                        
-                        <div class="vehicle-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> ${vehicle.location}</span>
-                            <span><i class="fas fa-clock"></i> ${vehicle.eta}</span>
-                        </div>
-                        
-                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-                            <button onclick="event.stopPropagation(); contactVehicle(${vehicle.id});" 
-                                    style="flex: 1; padding: 0.6rem; background: #25D366; color: white; border: none; border-radius: 3px; cursor: pointer;">
-                                <i class="fab fa-whatsapp"></i> Consultar
+                        <p style="color: #86868b; font-size: 14px; margin-bottom: 16px;">${vehicle.description}</p>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="button" onclick="event.stopPropagation(); contactVehicle(${vehicle.id});" style="flex: 1;">
+                                Consultar
                             </button>
-                            <button onclick="event.stopPropagation(); startVehicleCustomization(${vehicle.id});" 
-                                    style="flex: 1; padding: 0.6rem; background: var(--black); color: white; border: none; border-radius: 3px; cursor: pointer;">
-                                <i class="fas fa-cog"></i> Personalizar
+                            <button class="button button-outline" onclick="event.stopPropagation(); customizeVehicle(${vehicle.id});" style="flex: 1;">
+                                Personalizar
                             </button>
                         </div>
                     </div>
                 </div>
             `).join('');
+            
+            // Scroll a la sección de vehículos si no es filtro "all"
+            if (filter !== "all" && filteredVehicles.length > 0) {
+                setTimeout(() => {
+                    document.getElementById('vehicles').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
         }
 
-        // Cargar kits
-        function loadKits() {
-            const container = document.getElementById('kitsGrid');
-            container.innerHTML = kits.map(kit => `
-                <div class="kit-card">
-                    <div class="kit-badge">KIT USA</div>
-                    <h4 style="font-weight: 400; margin-bottom: 0.5rem;">${kit.name}</h4>
-                    <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem; color: var(--green);">
-                        +$${formatPrice(kit.price)} CLP
-                    </div>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">${kit.description}</p>
-                    <p style="font-size: 0.8rem; color: #888;">Compatibilidad: ${kit.compatible.join(', ')}</p>
-                    <button onclick="showKitDetails('${kit.id}')" 
-                            style="margin-top: 1rem; width: 100%; padding: 0.6rem; background: var(--black); color: white; border: none; border-radius: 3px; cursor: pointer;">
-                        Ver Detalles
-                    </button>
-                </div>
-            `).join('');
+        // Filtrar vehículos (usado por los indicadores clickeables)
+        function filterVehicles(filter) {
+            currentFilter = filter;
+            loadVehicles(filter);
         }
 
         // Configurar filtros
         function setupFilters() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
+            document.querySelectorAll('.filter-button').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentFilter = this.dataset.filter;
-                    loadVehicles(currentFilter);
+                    const filter = this.textContent.toLowerCase();
+                    if (filter === "todos") {
+                        filterVehicles("all");
+                    } else if (filter === "en stock") {
+                        filterVehicles("stock");
+                    } else if (filter === "en tránsito") {
+                        filterVehicles("transit");
+                    } else if (filter === "para reservar") {
+                        filterVehicles("reserve");
+                    } else {
+                        filterVehicles(filter);
+                    }
                 });
             });
         }
@@ -664,122 +766,46 @@
             
             const modalContent = document.getElementById('customizationContent');
             modalContent.innerHTML = `
-                <div style="padding: 2rem;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                        <div>
-                            <img src="${vehicle.image}" style="width: 100%; border-radius: var(--radius);">
-                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                                <div style="padding: 0.5rem 1rem; background: ${vehicle.status === 'stock' ? 'var(--green)' : vehicle.status === 'transit' ? 'var(--blue)' : 'var(--orange)'}; color: white; border-radius: 20px; font-size: 0.9rem;">
-                                    ${vehicle.badge}
-                                </div>
+                <div class="customization-options">
+                    <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">${vehicle.name}</h2>
+                    <p style="color: #86868b; margin-bottom: 24px;">${vehicle.description}</p>
+                    
+                    <div style="background: var(--gray-50); padding: 20px; border-radius: var(--radius); margin-bottom: 32px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 32px; font-weight: 700;">$${formatPrice(vehicle.price)} CLP</div>
+                                <div style="color: #86868b; font-size: 14px;">${vehicle.location} • ${vehicle.eta}</div>
                             </div>
-                        </div>
-                        
-                        <div>
-                            <h2 style="font-weight: 350; margin-bottom: 0.5rem;">${vehicle.name}</h2>
-                            <div style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1rem;">
-                                $${formatPrice(vehicle.price)} CLP
-                            </div>
-                            
-                            <div style="margin-bottom: 2rem;">
-                                <h4 style="font-weight: 400; margin-bottom: 0.5rem;">Disponibilidad</h4>
-                                <p><strong>Ubicación:</strong> ${vehicle.location}</p>
-                                <p><strong>Disponibilidad:</strong> ${vehicle.eta}</p>
-                                <p><strong>Estado:</strong> ${vehicle.status === 'stock' ? 'Listo para entrega en Arica' : vehicle.status === 'transit' ? 'En camino desde USA' : 'Disponible para reserva'}</p>
-                            </div>
-                            
-                            <div style="margin-bottom: 2rem;">
-                                <h4 style="font-weight: 400; margin-bottom: 0.5rem;">Características</h4>
-                                <ul style="color: #666; padding-left: 1.5rem;">
-                                    ${vehicle.specs.map(spec => `<li style="margin-bottom: 0.3rem;">${spec}</li>`).join('')}
-                                </ul>
-                            </div>
-                            
-                            <div style="display: flex; gap: 1rem;">
-                                <button onclick="contactVehicle(${vehicle.id})" 
-                                        style="flex: 1; padding: 1rem; background: #25D366; color: white; border: none; border-radius: var(--radius); cursor: pointer;">
-                                    <i class="fab fa-whatsapp"></i> Reservar Ahora
-                                </button>
-                                <button onclick="startVehicleCustomization(${vehicle.id})" 
-                                        style="flex: 1; padding: 1rem; background: var(--black); color: white; border: none; border-radius: var(--radius); cursor: pointer;">
-                                    <i class="fas fa-cog"></i> Personalizar
-                                </button>
+                            <div class="vehicle-status ${vehicle.status === 'stock' ? 'status-badge-stock' : vehicle.status === 'transit' ? 'status-badge-transit' : 'status-badge-reserve'}" style="margin: 0;">
+                                ${vehicle.status === 'stock' ? 'En Stock Arica' : vehicle.status === 'transit' ? 'En Tránsito' : 'Para Reservar'}
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-            
-            document.getElementById('customizationModal').style.display = 'block';
-        }
-
-        // Mostrar detalles del kit
-        function showKitDetails(kitId) {
-            const kit = kits.find(k => k.id === kitId);
-            if (!kit) return;
-            
-            const modalContent = document.getElementById('customizationContent');
-            modalContent.innerHTML = `
-                <div style="padding: 2rem;">
-                    <h2 style="font-weight: 350; margin-bottom: 1rem;">${kit.name}</h2>
-                    <div style="font-size: 1.5rem; font-weight: 500; margin-bottom: 2rem; color: var(--green);">
-                        +$${formatPrice(kit.price)} CLP
-                    </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; margin-bottom: 2rem;">
-                        <img src="${kit.image}" style="width: 100%; border-radius: var(--radius);">
-                        <div>
-                            <h4 style="font-weight: 400; margin-bottom: 0.5rem;">Descripción del Kit</h4>
-                            <p style="color: #666; margin-bottom: 1rem;">${kit.description}</p>
-                            
-                            <h4 style="font-weight: 400; margin-bottom: 0.5rem;">Compatibilidad</h4>
-                            <p style="color: #666;">${kit.compatible.join(', ')}</p>
-                        </div>
-                    </div>
-                    
-                    <div style="background: var(--gray-50); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
-                        <h4 style="font-weight: 400; margin-bottom: 0.5rem;">¿Cómo funciona?</h4>
-                        <p style="color: #666; font-size: 0.9rem;">
-                            1. Seleccionas tu vehículo base<br>
-                            2. Agregas este kit a tu personalización<br>
-                            3. Lo importamos junto con tu vehículo desde USA<br>
-                            4. Lo instalamos en nuestro taller de Arica<br>
-                            5. Entregamos tu vehículo listo para usar
-                        </p>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <button onclick="addKitToVehicle('${kitId}')" 
-                                style="padding: 1rem 2rem; background: var(--black); color: white; border: none; border-radius: var(--radius); cursor: pointer; margin-right: 1rem;">
-                            <i class="fas fa-plus"></i> Agregar a Vehículo
+                    <div style="display: flex; gap: 12px;">
+                        <button class="button" onclick="contactVehicle(${vehicle.id})" style="flex: 1;">
+                            <i class="fab fa-whatsapp"></i> Reservar Ahora
                         </button>
-                        <button onclick="closeModal()" 
-                                style="padding: 1rem 2rem; background: transparent; color: var(--black); border: var(--border); border-radius: var(--radius); cursor: pointer;">
-                            Ver Otros Kits
+                        <button class="button button-outline" onclick="customizeVehicle(${vehicle.id})" style="flex: 1;">
+                            <i class="fas fa-cog"></i> Personalizar
                         </button>
                     </div>
                 </div>
-            `;
-            
-            document.getElementById('customizationModal').style.display = 'block';
-        }
-
-        // Iniciar personalización
-        function startCustomization() {
-            const modalContent = document.getElementById('customizationContent');
-            modalContent.innerHTML = `
-                <div style="padding: 2rem;">
-                    <h2 style="font-weight: 350; margin-bottom: 1rem;">Simulador de Personalización</h2>
-                    <p style="color: #666; margin-bottom: 2rem;">Selecciona un vehículo base para comenzar</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        ${vehicles.filter(v => v.status === 'stock').map(vehicle => `
-                            <div onclick="startVehicleCustomization(${vehicle.id})" style="cursor: pointer; border: var(--border); border-radius: var(--radius); padding: 1rem; text-align: center;">
-                                <img src="${vehicle.image}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 2px; margin-bottom: 0.5rem;">
-                                <div style="font-weight: 400;">${vehicle.name}</div>
-                                <div style="font-size: 0.9rem; color: #666;">$${formatPrice(vehicle.price)} CLP</div>
-                            </div>
-                        `).join('')}
+                <div class="customization-summary">
+                    <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 24px;">Especificaciones</h3>
+                    <div style="color: #86868b; font-size: 14px; line-height: 1.8;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span>Ubicación:</span>
+                            <span>${vehicle.location}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span>Disponibilidad:</span>
+                            <span>${vehicle.eta}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span>Estado:</span>
+                            <span>${vehicle.status === 'stock' ? 'Listo para entrega' : vehicle.status === 'transit' ? 'En camino desde USA' : 'Disponible para reserva'}</span>
+                        </div>
                     </div>
                 </div>
             `;
@@ -787,8 +813,8 @@
             document.getElementById('customizationModal').style.display = 'block';
         }
 
-        // Personalizar vehículo específico
-        function startVehicleCustomization(vehicleId) {
+        // Personalizar vehículo
+        function customizeVehicle(vehicleId) {
             const vehicle = vehicles.find(v => v.id === vehicleId);
             if (!vehicle) return;
             
@@ -796,99 +822,211 @@
             
             const modalContent = document.getElementById('customizationContent');
             modalContent.innerHTML = `
-                <div style="padding: 2rem;">
-                    <h2 style="font-weight: 350; margin-bottom: 1rem;">Personalizar: ${vehicle.name}</h2>
+                <div class="customization-options">
+                    <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Personalizar ${vehicle.name}</h2>
+                    <p style="color: #86868b; margin-bottom: 32px;">Agrega accesorios USA originales</p>
                     
-                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-top: 2rem;">
-                        <div>
-                            <h4 style="font-weight: 400; margin-bottom: 1rem;">Opciones de Personalización</h4>
-                            
-                            <div style="margin-bottom: 2rem;">
-                                <h5 style="font-weight: 400; margin-bottom: 0.5rem; color: #666;">Kits Disponibles</h5>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-                                    ${kits.filter(k => k.compatible.includes(vehicle.type)).map(kit => `
-                                        <div onclick="addKitToVehicle('${kit.id}')" style="cursor: pointer; border: var(--border); border-radius: var(--radius); padding: 1rem; text-align: center;">
-                                            <div style="font-weight: 400; font-size: 0.9rem;">${kit.name}</div>
-                                            <div style="font-size: 0.8rem; color: var(--green);">+$${formatPrice(kit.price)}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                            
-                            <div style="margin-bottom: 2rem;">
-                                <h5 style="font-weight: 400; margin-bottom: 0.5rem; color: #666;">Accesorios Individuales</h5>
-                                <div style="background: var(--gray-50); padding: 1rem; border-radius: var(--radius);">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span>Llantas 20" Fuel Off-Road</span>
-                                        <button onclick="addAccessory('Llantas 20\"', 1200000)" style="padding: 0.2rem 0.6rem; background: var(--black); color: white; border: none; border-radius: 3px; cursor: pointer;">+ $1.200.000</button>
+                    <div class="option-group">
+                        <h3 class="option-title">Llantas</h3>
+                        <div class="option-items" id="wheelsOptions">
+                            ${customizationOptions.wheels.map(option => `
+                                <div class="option-item ${selectedOptions.wheels.id === option.id ? 'selected' : ''}" 
+                                     onclick="selectOption('wheels', '${option.id}')">
+                                    <div class="option-image" style="background: var(--gray-100); display: flex; align-items: center; justify-content: center; color: #86868b;">
+                                        <i class="fas fa-tire" style="font-size: 24px;"></i>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span>Sistema de escape Flowmaster</span>
-                                        <button onclick="addAccessory('Escape Flowmaster', 850000)" style="padding: 0.2rem 0.6rem; background: var(--black); color: white; border: none; border-radius: 3px; cursor: pointer;">+ $850.000</button>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <span>Kit LED completa</span>
-                                        <button onclick="addAccessory('Kit LED', 650000)" style="padding: 0.2rem 0.6rem; background: var(--black); color: white; border: none; border-radius: 3px; cursor: pointer;">+ $650.000</button>
+                                    <div style="font-weight: 500; margin-bottom: 4px;">${option.name}</div>
+                                    <div style="color: ${option.price > 0 ? 'var(--green)' : '#86868b'}; font-size: 13px;">
+                                        ${option.price > 0 ? `+$${formatPrice(option.price)}` : 'Incluido'}
                                     </div>
                                 </div>
-                            </div>
+                            `).join('')}
                         </div>
-                        
-                        <div>
-                            <h4 style="font-weight: 400; margin-bottom: 1rem;">Tu Configuración</h4>
-                            <div style="background: var(--gray-50); padding: 1.5rem; border-radius: var(--radius);">
-                                <div style="margin-bottom: 1rem;">
-                                    <div style="font-size: 0.9rem; color: #666;">Vehículo base:</div>
-                                    <div style="font-weight: 500;">${vehicle.name}</div>
-                                    <div style="font-size: 1.2rem; color: var(--green);">$${formatPrice(vehicle.price)} CLP</div>
-                                </div>
-                                
-                                <div id="selectedAccessories" style="margin-bottom: 1rem;">
-                                    <!-- Accesorios seleccionados aparecerán aquí -->
-                                </div>
-                                
-                                <div style="border-top: var(--border); padding-top: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 500;">
-                                        <span>Total:</span>
-                                        <span id="totalPrice">$${formatPrice(vehicle.price)} CLP</span>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3 class="option-title">Sistema de Audio</h3>
+                        <div class="option-items" id="audioOptions">
+                            ${customizationOptions.audio.map(option => `
+                                <div class="option-item ${selectedOptions.audio.id === option.id ? 'selected' : ''}" 
+                                     onclick="selectOption('audio', '${option.id}')">
+                                    <div class="option-image" style="background: var(--gray-100); display: flex; align-items: center; justify-content: center; color: #86868b;">
+                                        <i class="fas fa-volume-up" style="font-size: 24px;"></i>
+                                    </div>
+                                    <div style="font-weight: 500; margin-bottom: 4px;">${option.name}</div>
+                                    <div style="color: ${option.price > 0 ? 'var(--green)' : '#86868b'}; font-size: 13px;">
+                                        ${option.price > 0 ? `+$${formatPrice(option.price)}` : 'Incluido'}
                                     </div>
                                 </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3 class="option-title">Iluminación LED</h3>
+                        <div class="option-items" id="lightingOptions">
+                            ${customizationOptions.lighting.map(option => `
+                                <div class="option-item ${selectedOptions.lighting.id === option.id ? 'selected' : ''}" 
+                                     onclick="selectOption('lighting', '${option.id}')">
+                                    <div class="option-image" style="background: var(--gray-100); display: flex; align-items: center; justify-content: center; color: #86868b;">
+                                        <i class="fas fa-lightbulb" style="font-size: 24px;"></i>
+                                    </div>
+                                    <div style="font-weight: 500; margin-bottom: 4px;">${option.name}</div>
+                                    <div style="color: ${option.price > 0 ? 'var(--green)' : '#86868b'}; font-size: 13px;">
+                                        ${option.price > 0 ? `+$${formatPrice(option.price)}` : 'Incluido'}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+                <div class="customization-summary">
+                    <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 24px;">Tu Configuración</h3>
+                    
+                    <div style="margin-bottom: 24px;">
+                        <div style="font-size: 13px; color: #86868b; margin-bottom: 8px;">Vehículo base</div>
+                        <div style="font-weight: 500;">${vehicle.name}</div>
+                        <div style="font-size: 24px; font-weight: 700; margin-top: 4px;">$${formatPrice(vehicle.price)} CLP</div>
+                    </div>
+                    
+                    <div id="selectedOptionsList" style="margin-bottom: 24px;">
+                        <!-- Opciones seleccionadas -->
+                    </div>
+                    
+                    <div style="border-top: var(--border); padding-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-weight: 600;">Total</div>
+                            <div style="font-size: 32px; font-weight: 700;" id="totalPrice">$${formatPrice(vehicle.price)} CLP</div>
+                        </div>
+                    </div>
+                    
+                    <button class="button" onclick="requestCustomization()" style="margin-top: 24px;">
+                        <i class="fab fa-whatsapp"></i> Solicitar Cotización
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('customizationModal').style.display = 'block';
+            updateSelectedOptions();
+            updateTotalPrice();
+        }
+
+        // Seleccionar opción
+        function selectOption(category, optionId) {
+            const options = customizationOptions[category];
+            const option = options.find(o => o.id === optionId);
+            
+            if (option) {
+                selectedOptions[category] = option;
+                
+                // Actualizar UI
+                document.querySelectorAll(`#${category}Options .option-item`).forEach(item => {
+                    item.classList.remove('selected');
+                });
+                event.target.closest('.option-item').classList.add('selected');
+                
+                updateSelectedOptions();
+                updateTotalPrice();
+            }
+        }
+
+        // Actualizar opciones seleccionadas
+        function updateSelectedOptions() {
+            const container = document.getElementById('selectedOptionsList');
+            if (!container) return;
+            
+            let html = '';
+            
+            if (selectedOptions.wheels.price > 0) {
+                html += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+                        <span>${selectedOptions.wheels.name}</span>
+                        <span style="color: var(--green);">+$${formatPrice(selectedOptions.wheels.price)}</span>
+                    </div>
+                `;
+            }
+            
+            if (selectedOptions.audio.price > 0) {
+                html += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+                        <span>${selectedOptions.audio.name}</span>
+                        <span style="color: var(--green);">+$${formatPrice(selectedOptions.audio.price)}</span>
+                    </div>
+                `;
+            }
+            
+            if (selectedOptions.lighting.price > 0) {
+                html += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+                        <span>${selectedOptions.lighting.name}</span>
+                        <span style="color: var(--green);">+$${formatPrice(selectedOptions.lighting.price)}</span>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html || '<div style="color: #86868b; font-size: 14px;">No hay accesorios seleccionados</div>';
+        }
+
+        // Actualizar precio total
+        function updateTotalPrice() {
+            if (!selectedVehicle) return;
+            
+            const totalElement = document.getElementById('totalPrice');
+            if (!totalElement) return;
+            
+            const basePrice = selectedVehicle.price;
+            const extrasTotal = 
+                selectedOptions.wheels.price + 
+                selectedOptions.audio.price + 
+                selectedOptions.lighting.price;
+            
+            const total = basePrice + extrasTotal;
+            totalElement.textContent = `$${formatPrice(total)} CLP`;
+        }
+
+        // Mostrar modal de personalización
+        function showCustomizationModal() {
+            const modalContent = document.getElementById('customizationContent');
+            modalContent.innerHTML = `
+                <div class="customization-options">
+                    <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Simular Personalización</h2>
+                    <p style="color: #86868b; margin-bottom: 32px;">Selecciona un vehículo para comenzar</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                        ${vehicles.slice(0, 3).map(vehicle => `
+                            <div onclick="customizeVehicle(${vehicle.id})" style="cursor: pointer; border: var(--border); border-radius: var(--radius); padding: 20px; text-align: center;">
+                                <img src="${vehicle.image}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 12px;">
+                                <div style="font-weight: 500; margin-bottom: 4px;">${vehicle.name}</div>
+                                <div style="font-size: 14px; color: #86868b; margin-bottom: 8px;">${vehicle.description.split('•')[0]}</div>
+                                <div style="font-size: 17px; font-weight: 600;">$${formatPrice(vehicle.price)} CLP</div>
                             </div>
-                            
-                            <button onclick="requestCustomization()" 
-                                    style="width: 100%; margin-top: 1rem; padding: 1rem; background: #25D366; color: white; border: none; border-radius: var(--radius); cursor: pointer;">
-                                <i class="fab fa-whatsapp"></i> Solicitar Cotización
-                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="customization-summary">
+                    <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 16px;">Beneficios</h3>
+                    <div style="color: #86868b; font-size: 14px; line-height: 1.8;">
+                        <div style="display: flex; align-items: start; margin-bottom: 16px;">
+                            <i class="fas fa-check" style="color: var(--green); margin-right: 12px; margin-top: 4px;"></i>
+                            <span>Accesorios USA originales</span>
+                        </div>
+                        <div style="display: flex; align-items: start; margin-bottom: 16px;">
+                            <i class="fas fa-check" style="color: var(--green); margin-right: 12px; margin-top: 4px;"></i>
+                            <span>Instalación profesional en Arica</span>
+                        </div>
+                        <div style="display: flex; align-items: start; margin-bottom: 16px;">
+                            <i class="fas fa-check" style="color: var(--green); margin-right: 12px; margin-top: 4px;"></i>
+                            <span>Garantía de 6 meses</span>
+                        </div>
+                        <div style="display: flex; align-items: start;">
+                            <i class="fas fa-check" style="color: var(--green); margin-right: 12px; margin-top: 4px;"></i>
+                            <span>Precio todo incluido</span>
                         </div>
                     </div>
                 </div>
             `;
             
             document.getElementById('customizationModal').style.display = 'block';
-            updateCustomizationTotal();
-        }
-
-        // Agregar kit a vehículo
-        function addKitToVehicle(kitId) {
-            // Implementar lógica para agregar kit
-            alert(`Kit agregado a ${selectedVehicle.name}. Proximamente podrás ver el total actualizado.`);
-        }
-
-        // Agregar accesorio
-        function addAccessory(name, price) {
-            const container = document.getElementById('selectedAccessories');
-            container.innerHTML += `
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.3rem;">
-                    <span>${name}</span>
-                    <span style="color: var(--green);">+$${formatPrice(price)}</span>
-                </div>
-            `;
-            updateCustomizationTotal();
-        }
-
-        // Actualizar total de personalización
-        function updateCustomizationTotal() {
-            // Implementar cálculo de total
         }
 
         // Contactar por vehículo
@@ -896,7 +1034,7 @@
             const vehicle = vehicles.find(v => v.id === vehicleId);
             if (!vehicle) return;
             
-            const message = `Hola Import American Cars, estoy interesado en el vehículo: ${vehicle.name} ($${formatPrice(vehicle.price)} CLP). Estado: ${vehicle.badge}. ¿Podrían darme más información?`;
+            const message = `Hola, estoy interesado en el vehículo: ${vehicle.name} ($${formatPrice(vehicle.price)} CLP). Estado: ${vehicle.status === 'stock' ? 'En Stock Arica' : vehicle.status === 'transit' ? 'En Tránsito' : 'Para Reservar'}. ¿Podrían darme más información?`;
             window.open(`https://wa.me/56987654321?text=${encodeURIComponent(message)}`, '_blank');
         }
 
@@ -904,29 +1042,41 @@
         function requestCustomization() {
             if (!selectedVehicle) return;
             
-            const message = `Hola Import American Cars, quisiera una cotización personalizada para el vehículo: ${selectedVehicle.name}.`;
+            const basePrice = selectedVehicle.price;
+            const extrasTotal = 
+                selectedOptions.wheels.price + 
+                selectedOptions.audio.price + 
+                selectedOptions.lighting.price;
+            const total = basePrice + extrasTotal;
+            
+            const message = `Hola, quisiera cotizar esta configuración personalizada:%0A%0A🚗 *Vehículo:* ${selectedVehicle.name}%0A💰 *Precio base:* $${formatPrice(basePrice)} CLP%0A%0A⚙️ *Personalización:*%0A${selectedOptions.wheels.price > 0 ? `• ${selectedOptions.wheels.name}: +$${formatPrice(selectedOptions.wheels.price)}%0A` : ''}${selectedOptions.audio.price > 0 ? `• ${selectedOptions.audio.name}: +$${formatPrice(selectedOptions.audio.price)}%0A` : ''}${selectedOptions.lighting.price > 0 ? `• ${selectedOptions.lighting.name}: +$${formatPrice(selectedOptions.lighting.price)}%0A` : ''}%0A💵 *TOTAL:* $${formatPrice(total)} CLP%0A%0A¿Podemos proceder con esta configuración?`;
+            
             window.open(`https://wa.me/56987654321?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         // Cerrar modal
         function closeModal() {
             document.getElementById('customizationModal').style.display = 'none';
+            // Resetear opciones seleccionadas
+            selectedOptions = {
+                wheels: customizationOptions.wheels[0],
+                audio: customizationOptions.audio[0],
+                lighting: customizationOptions.lighting[0]
+            };
         }
 
-        // Scroll suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        window.scrollTo({
-                            top: target.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Cerrar modal al hacer click fuera
+        document.getElementById('customizationModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('customizationModal')) {
+                closeModal();
+            }
         });
     </script>
 </body>
