@@ -281,6 +281,21 @@ textarea{width:100%;padding:11px 12px;background:var(--surface-2);border:1px sol
         </button>
         <div id="recordatoriosResultado" style="margin-top:12px;font-size:12.5px;color:var(--muted)"></div>
       </div>
+
+      <div class="card">
+        <h2>📣 Aviso de lanzamiento oficial</h2>
+        <p style="color:var(--muted);font-size:12.5px;margin-bottom:14px">
+          Envío único (no un recordatorio recurrente) a <b>todos los compradores confirmados hasta ahora</b>
+          (tipo "comprado", una sola vez por persona aunque tenga varias órdenes), avisando el lanzamiento
+          oficial del sorteo y la nueva fecha de cierre de venta (se lee en vivo de la configuración del
+          sorteo al momento de mandar cada correo). Úsalo una sola vez — no vuelvas a apretarlo después,
+          o se les manda el mismo aviso dos veces a todos.
+        </p>
+        <button class="btn btn-primary btn-sm" onclick="enviarAvisoLanzamiento()" id="btnLanzamiento">
+          <i class="fas fa-bullhorn"></i> Enviar aviso de lanzamiento a todos los compradores
+        </button>
+        <div id="lanzamientoResultado" style="margin-top:12px;font-size:12.5px;color:var(--muted)"></div>
+      </div>
     </section>
 
     <!-- ===== PACKS ===== -->
@@ -1265,6 +1280,86 @@ async function enviarRecordatoriosReferidos() {
     resultado.innerHTML = resumenHtml;
   } catch (e) {
     alert('Error al enviar recordatorios: ' + (e.message || e));
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ---------- Aviso de lanzamiento oficial (envío único) ---------- */
+async function enviarAvisoLanzamiento() {
+  const btn = document.getElementById('btnLanzamiento');
+  const resultado = document.getElementById('lanzamientoResultado');
+  btn.disabled = true;
+
+  try {
+    const ordenes = await stamperAPI.getOrdenesAll();
+
+    // Una fila por persona (no por orden) — alguien con 2+ compras solo
+    // debe recibir este aviso una vez. Se toma el nombre de su orden
+    // más reciente, mismo criterio usado en compradores_sin_referir.
+    const porPersona = new Map();
+    ordenes
+      .filter(o => o.estado === 'completado' && o.tipo === 'comprado')
+      .forEach(o => {
+        const key = (o.email || '').toLowerCase().trim();
+        if (!key) return;
+        const actual = porPersona.get(key);
+        if (!actual || new Date(o.created_at) > new Date(actual.created_at)) {
+          porPersona.set(key, o);
+        }
+      });
+    const destinatarios = [...porPersona.values()];
+
+    if (!destinatarios.length) {
+      resultado.textContent = 'No hay compradores confirmados todavía.';
+      return;
+    }
+    if (!confirm(`Se enviará el aviso de lanzamiento a ${destinatarios.length} comprador(es) confirmado(s), UNA vez cada uno.\n\nEste envío no se puede deshacer. ¿Continuar?`)) {
+      return;
+    }
+
+    let enviados = 0, fallidos = 0;
+    const fallosDetalle = [];
+    resultado.textContent = `Enviando 0 / ${destinatarios.length}…`;
+
+    const { data: sessionData } = await stamperAPI.client.auth.getSession();
+    const adminToken = sessionData?.session?.access_token;
+
+    for (const c of destinatarios) {
+      try {
+        const res = await fetch(`${SUPABASE_CONFIG.url}/functions/v1/send-launch-announcement`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${adminToken}` },
+          body: JSON.stringify({ nombre: c.nombre, email: c.email })
+        });
+        if (res.ok) {
+          enviados++;
+        } else {
+          fallidos++;
+          let motivo = `HTTP ${res.status}`;
+          try {
+            const errBody = await res.json();
+            motivo = errBody?.error ? String(errBody.error).slice(0, 200) : motivo;
+          } catch { /* respuesta no era JSON */ }
+          fallosDetalle.push({ email: c.email, motivo });
+        }
+      } catch (e) {
+        fallidos++;
+        fallosDetalle.push({ email: c.email, motivo: 'Error de red: ' + (e.message || e) });
+      }
+      resultado.textContent = `Enviando ${enviados + fallidos} / ${destinatarios.length}…`;
+      await new Promise(r => setTimeout(r, 300)); // no saturar el servicio de correo
+    }
+
+    let resumenHtml = `Listo: ${enviados} correo(s) enviados${fallidos ? `, ${fallidos} fallaron` : ''}.`;
+    if (fallosDetalle.length) {
+      resumenHtml += '<ul style="margin:8px 0 0;padding-left:18px">' +
+        fallosDetalle.map(f => `<li>${escapeHtml(f.email)} — ${escapeHtml(f.motivo)}</li>`).join('') +
+        '</ul>';
+    }
+    resultado.innerHTML = resumenHtml;
+  } catch (e) {
+    alert('Error al enviar el aviso de lanzamiento: ' + (e.message || e));
   } finally {
     btn.disabled = false;
   }
